@@ -234,3 +234,20 @@ deleteVirtualDesktop()
     CurrentDesktop--
     OutputDebug, [delete] desktops: %DesktopCount% current: %CurrentDesktop%
 }
+
+createInitialDesktops(NumInitialDesktops)
+{
+    global DesktopCount, CurrentDesktop
+
+    OutputDebug, Creating %NumInitialDesktops% initial desktops
+
+    Current := CurrentDesktop
+
+    Loop, % NumInitialDesktops - DesktopCount
+    {
+        createVirtualDesktop()
+    }
+
+    OutputDebug, Switching back to desktop %Current%
+    _switchDesktopToTarget(Current)
+}
